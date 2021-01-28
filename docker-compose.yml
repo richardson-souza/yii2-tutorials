@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  yii2-basic: # http://localhost:80
+    build:
+      context: .
+    image: yii2/basic
+    container_name: yii2.basic
+    hostname: basic.yii2
+    ports:
+      - 3306:80
+    volumes:
+      - ./app:/var/www/html/
+
+    working_dir: /var/www/html/
+    networks:
+      - yii2-network
+    command: php -S 0.0.0.0:80 -t web/
+
+networks:
+  yii2-network:
+    driver: bridge
