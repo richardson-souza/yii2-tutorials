@@ -1,6 +1,24 @@
 version: "3.8"
 services:
-  yii2-basic: # http://localhost:80
+  db-yii2:
+    image: mysql:5.7.31
+    container_name: yii2.db
+    hostname: db.yii2
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PWD}"
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PWD}"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "${DB_ALLOW_EMPTY_PWD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+    ports:
+      - 3307:3306
+    volumes:
+      - yii2_data:/var/lib/mysql
+    networks:
+      - yii2-network
+
+  yii2-basic: # http://localhost:3306
     build:
       context: .
     image: yii2/basic
@@ -19,3 +37,6 @@ services:
 networks:
   yii2-network:
     driver: bridge
+
+volumes:
+  yii2_data:
