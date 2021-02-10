@@ -1,14 +1,14 @@
 FROM php:5.6-fpm
 
 RUN apt-get update && apt-get install -y \
-  gcc \
-  make \
-  git \
-  vim \
-  autoconf \
-  libc-dev \
-  pkg-config \
-  cron
+    gcc \
+    make \
+    git \
+    vim \
+    autoconf \
+    libc-dev \
+    pkg-config \
+    cron
 
 RUN pecl install xdebug-2.5.3 \
     && docker-php-ext-enable xdebug

@@ -12,20 +12,20 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "${DB_ALLOW_EMPTY_PWD}"
       MYSQL_DATABASE: "${DB_NAME}"
     ports:
-      - 3307:3306
+      - 3310:3306
     volumes:
       - yii2_data:/var/lib/mysql
     networks:
       - yii2-network
 
-  yii2-basic: # http://localhost:3306
+  yii2-basic: # http://localhost:3311
     build:
       context: .
     image: yii2/basic
     container_name: yii2.basic
     hostname: basic.yii2
     ports:
-      - 3306:80
+      - 3311:80
     volumes:
       - ./app:/var/www/html/
 
